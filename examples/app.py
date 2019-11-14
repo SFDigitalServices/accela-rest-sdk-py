@@ -26,12 +26,14 @@ class Page():
         dispatch(_req, _resp)
 
     def default_page(self, _req, _resp):
+        # pylint: disable=no-self-use
         """ default page response """
         msg = {'message': 'hello'}
         _resp.body = json.dumps(jsend.success(msg))
         _resp.status = falcon.HTTP_200
 
     def default_error(self, _req, resp):
+        # pylint: disable=no-self-use
         """Handle default error"""
         msg = falcon.HTTP_404
         status = falcon.HTTP_404

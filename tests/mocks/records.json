@@ -1,0 +1,54 @@
+{
+    "result": [
+      {
+        "name": "Accela API Test",
+        "id": "AGENCY-ABCDEF-00000-00123",
+        "type": {
+          "module": "Planning",
+          "value": "Planning\/Applications\/Referral\/MIS",
+          "type": "Applications",
+          "category": "MIS",
+          "text": "Misc. Permits-REF (MIS)",
+          "subType": "Referral",
+          "alias": "Misc. Permits-REF (MIS)",
+          "group": "Planning",
+          "id": "Planning-Applications-Referral-MIS"
+        },
+        "description": "Testing Accela API",
+        "module": "Planning",
+        "status": {
+          "value": "Open",
+          "text": "Open"
+        },
+        "recordClass": "COMPLETE",
+        "initiatedProduct": "AA",
+        "statusDate": "2018-09-06 14:11:16",
+        "serviceProviderCode": "AGENCY",
+        "createdBy": "TEST",
+        "updateDate": "2019-09-06 14:11:17",
+        "undistributedCost": 0,
+        "assignedToDepartment": "AGENCY\/PLANNING\/CURRENT\/NA\/NA\/NA\/CURRENT",
+        "assignedUser": "TEST",
+        "jobValue": 0,
+        "trackingId": 205629205,
+        "openedDate": "2019-09-06 00:00:00",
+        "renewalInfo": {
+          "expirationDate": "2019-01-31 00:00:00",
+          "expirationStatus": "Pending"
+        },
+        "customId": "2019-007402MIS",
+        "totalJobCost": 0,
+        "value": "ABCDEF-00000-00123",
+        "totalFee": 0,
+        "totalPay": 0,
+        "balance": 0,
+        "booking": false,
+        "infraction": false,
+        "misdemeanor": false,
+        "offenseWitnessed": false,
+        "defendantSignature": false,
+        "publicOwned": false
+      }
+    ],
+    "status": 200
+  }
