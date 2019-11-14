@@ -17,6 +17,14 @@ class AccelaRestClient():
 
         return response
 
+    def post(self, path, data, params, auth_type):
+        """ Post request. """
+        url = self.config['API_ENDPOINT'] + path
+        headers = self.set_auth_type(auth_type)
+        response = requests.post(url, headers=headers, data=data, params=params)
+
+        return response
+
     def set_auth_type(self, auth_type):
         """" Method to set authorization type. """
         headers = {
