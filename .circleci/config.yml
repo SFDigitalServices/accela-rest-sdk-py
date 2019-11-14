@@ -37,12 +37,6 @@ jobs:
           paths:
             - ./venv
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
-      
-      - run:
-          name: start gunicorn
-          command: |
-            pipenv run gunicorn 'examples.app:run()'
-          background: true
 
       # run tests!
       # this example uses Django's built-in test-runner
@@ -52,7 +46,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            pipenv run python -m pytest tests/ --cov=boilerplate_sdk  --cov-fail-under=100
+            pipenv run python -m pytest tests/ --cov=accela_rest_sdk  --cov-fail-under=100
             pipenv run coveralls
 
 

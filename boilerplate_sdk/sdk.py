@@ -1,6 +1,6 @@
 """ SDK module """
 import requests
-class SDK(object):
+class SDK():
     """ SDK class """
     def __init__(self, host='https://jsonplaceholder.typicode.com'):
         self.host = host
