@@ -1,5 +1,6 @@
 """ Accela app example """
 import os
+import sys
 import json
 import falcon
 import jsend
@@ -16,8 +17,16 @@ class Page():
     """ Page class """
     accela = None
 
-    def on_get(self, _req, _resp, name):
+    def on_get(self, req, resp, name):
         """ on page GET requests """
+        self.dispatch(req, resp, name)
+
+    def on_post(self, req, resp, name):
+        """ on page POST requests """
+        self.dispatch(req, resp, name)
+
+    def dispatch(self, _req, _resp, name):
+        """ Dispatch requests """
         dispatch = None
         if hasattr(self.__class__, name) and callable(getattr(self.__class__, name)):
             dispatch = getattr(self, name)
@@ -71,6 +80,28 @@ class Page():
 
         else:
             resp.status = falcon.HTTP_400
-            msg = "Parameter ids is required "
+            msg = "Parameter ids is required"
+            resp.body = json.dumps(jsend.error(msg))
+            return
+
+    def create_record(self, req, resp):
+        """ example post_records """
+        if req.content_length:
+            params = {'fields':'customId,id'}
+            record = req.stream.read(sys.maxsize)
+            response = self.accela.records.create_record(record, params)
+
+            # default
+            resp.status = falcon.HTTP_400
+            resp.body = json.dumps(jsend.error(response.text))
+
+            # if successful
+            if response.status_code == 200:
+                resp.status = falcon.HTTP_200
+                resp.body = json.dumps(response.json())
+
+        else:
+            resp.status = falcon.HTTP_400
+            msg = "The create record information is missing"
             resp.body = json.dumps(jsend.error(msg))
             return

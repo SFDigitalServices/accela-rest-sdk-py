@@ -10,3 +10,8 @@ class AccelaRestRecords():
         """ Gets the requested record(s). """
         path = self.path_base + '/' + record_ids
         return self.client.get(path, params, auth_type)
+
+    def create_record(self, record, params=None, auth_type='AccessToken'):
+        """ Creates a new, full record """
+        path = self.path_base
+        return self.client.post(path, record, params, auth_type)
