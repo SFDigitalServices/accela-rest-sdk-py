@@ -1,4 +1,5 @@
 """ SDK module """
+import urllib.parse
 import requests
 class AccelaRestClient():
     """ Accela REST Client Class """
@@ -6,12 +7,14 @@ class AccelaRestClient():
     def __init__(self, config):
         self.config = config
         self.config['API_ENDPOINT'] = config.get('BASE_URL', 'https://apis.accela.com')
-        self.config['AUTH_ENDPOINT'] = self.config['API_ENDPOINT'] + '/oauth2/token'
-        self.config['TOKEN_ENDPOINT'] = self.config['API_ENDPOINT'] + '/oauth2/tokeninfo'
+        self.config['AUTH_ENDPOINT'] = urllib.parse.urljoin(
+            self.config['API_ENDPOINT'], '/oauth2/token')
+        self.config['TOKEN_ENDPOINT'] = urllib.parse.urljoin(
+            self.config['API_ENDPOINT'], '/oauth2/tokeninfo')
 
     def get(self, path, params, auth_type):
         """ Get request. """
-        url = self.config['API_ENDPOINT'] + path
+        url = urllib.parse.urljoin(self.config['API_ENDPOINT'], path)
         headers = self.set_auth_type(auth_type)
         response = requests.get(url, headers=headers, params=params)
 
@@ -19,7 +22,7 @@ class AccelaRestClient():
 
     def post(self, path, data, params, auth_type):
         """ Post request. """
-        url = self.config['API_ENDPOINT'] + path
+        url = urllib.parse.urljoin(self.config['API_ENDPOINT'], path)
         headers = self.set_auth_type(auth_type)
         response = requests.post(url, headers=headers, data=data, params=params)
 
