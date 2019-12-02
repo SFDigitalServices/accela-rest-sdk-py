@@ -5,12 +5,12 @@
 from distutils.core import setup
 import setuptools # pylint: disable=unused-import
 setup(name='accela-rest-sdk',
-      version='0.1.0',
+      version='0.1.1',
       license='MIT',
       author='hshaosf',
       author_email='hshaosf@SFDigitalServices',
       url='https://github.com/SFDigitalServices',
-      packages=["accela_rest_sdk"],
+      packages=["accela_rest_sdk", "accela_rest_sdk.accela_rest"],
       install_requires=[
           'requests'
       ]
