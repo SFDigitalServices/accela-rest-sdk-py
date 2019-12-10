@@ -17,7 +17,7 @@ sys.path.insert(0, os.path.abspath('../../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Boilerplate SDK in Python'
+project = 'Python module for working with the Accela REST API.'
 copyright = '2019, San Francisco Digital Services'
 author = 'San Francisco Digital Services'
 

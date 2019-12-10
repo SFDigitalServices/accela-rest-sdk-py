@@ -1,7 +1,13 @@
 Welcome to Boilerplate SDK in Python's documentation!
 =====================================================
 
-.. automodule:: boilerplate_sdk.sdk
+.. automodule:: accela_rest_sdk.accela
+    :members:
+
+.. automodule:: accela_rest_sdk.accela_rest.records
+    :members:
+
+.. automodule:: accela_rest_sdk.accela_rest.rest_client
     :members:
 
 .. toctree::
