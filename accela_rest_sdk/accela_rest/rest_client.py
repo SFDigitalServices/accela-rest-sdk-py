@@ -55,7 +55,7 @@ class AccelaRestClient():
         return response
 
     def set_auth_type(self, auth_type):
-        """"
+        """
         | Method to set authorization type.
 
         :param auth_type: authorization type
