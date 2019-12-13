@@ -1,14 +1,16 @@
-Welcome to Boilerplate SDK in Python's documentation!
-=====================================================
+Welcome to Accela REST API SDK in Python's documentation!
+=========================================================
 
-.. automodule:: boilerplate_sdk.sdk
+.. automodule:: accela_rest_sdk.accela
     :members:
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
+   accela_rest/records.rst
+   accela_rest/rest_client.rst
 
+    
 
 Indices and tables
 ==================

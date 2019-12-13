@@ -1,3 +1,4 @@
+# pylint: skip-file
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -17,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Boilerplate SDK in Python'
+project = 'Accela REST API SDK in Python'
 copyright = '2019, San Francisco Digital Services'
 author = 'San Francisco Digital Services'
 

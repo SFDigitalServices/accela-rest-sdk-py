@@ -1,10 +1,16 @@
-""" SDK module """
+""" Accela REST Client module """
 import urllib.parse
 import requests
 class AccelaRestClient():
-    """ Accela REST Client Class """
+    """
+    | Accela REST Client Class
 
+    :param config: Configuration
+    :type config: dict
+    """
     def __init__(self, config):
+        """Constructor method
+        """
         self.config = config
         self.config['API_ENDPOINT'] = config.get('BASE_URL', 'https://apis.accela.com')
         self.config['AUTH_ENDPOINT'] = urllib.parse.urljoin(
@@ -13,7 +19,16 @@ class AccelaRestClient():
             self.config['API_ENDPOINT'], '/oauth2/tokeninfo')
 
     def get(self, path, params, auth_type):
-        """ Get request. """
+        """
+        | GET request.
+
+        :param path: API Resource URI
+        :type path: str
+        :param auth_type: authorization type
+        :type auth_type: str
+        :return: server's response to the GET request
+        :rtype: requests.Response
+        """
         url = urllib.parse.urljoin(self.config['API_ENDPOINT'], path)
         headers = self.set_auth_type(auth_type)
         response = requests.get(url, headers=headers, params=params)
@@ -21,7 +36,18 @@ class AccelaRestClient():
         return response
 
     def post(self, path, data, params, auth_type):
-        """ Post request. """
+        """
+        | POST request.
+
+        :param path: API Resource URI
+        :type path: str
+        :param data: Post Data
+        :type data: dict
+        :param auth_type: authorization type
+        :type auth_type: str
+        :return: server's response to the POST request
+        :rtype: requests.Response
+        """
         url = urllib.parse.urljoin(self.config['API_ENDPOINT'], path)
         headers = self.set_auth_type(auth_type)
         response = requests.post(url, headers=headers, data=data, params=params)
@@ -29,7 +55,14 @@ class AccelaRestClient():
         return response
 
     def set_auth_type(self, auth_type):
-        """" Method to set authorization type. """
+        """
+        | Method to set authorization type.
+
+        :param auth_type: authorization type
+        :type auth_type: str
+        :return: headers
+        :rtype: dict
+        """
         headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -46,7 +79,20 @@ class AccelaRestClient():
         return headers
 
     def get_token(self, username, password, scope, environment):
-        """ Get Token """
+        """
+        | Get authentication token
+
+        :param username: User name
+        :type username: str
+        :param password: Password
+        :type password: str
+        :param scope: Scope
+        :type scope: str
+        :param environment: Environment
+        :type environment: str
+        :return: JSON object of the response
+        :rtype: dict
+        """
         params = {}
         params['grant_type'] = 'password'
         params['client_id'] = self.config['APP_ID']
