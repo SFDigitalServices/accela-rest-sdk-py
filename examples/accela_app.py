@@ -113,8 +113,8 @@ class Page():
             resp.body = json.dumps(jsend.error(msg))
             return
 
-    def update_record_custom_tables(self, req, resp):
-        """ example update_record_custom_tables """
+    def update_record_custom(self, req, resp, custom_type='forms'):
+        """ example update_record_custom """
         record_ids = None
         if 'ids' in req.params:
             record_ids = req.params['ids']
@@ -129,9 +129,13 @@ class Page():
             params = req.params
             del params['ids']
 
-            custom_tables = req.stream.read(sys.maxsize)
-            response = self.accela.records.update_record_custom_tables(
-                record_ids, custom_tables, params)
+            data = req.stream.read(sys.maxsize)
+            if custom_type == 'tables':
+                response = self.accela.records.update_record_custom_tables(
+                    record_ids, data, params)
+            else:
+                response = self.accela.records.update_record_custom_forms(
+                    record_ids, data, params)
 
             # default
             resp.status = falcon.HTTP_400
@@ -147,3 +151,12 @@ class Page():
             msg = "Request body is required."
             resp.body = json.dumps(jsend.error(msg))
             return
+
+
+    def update_record_custom_tables(self, req, resp):
+        """ example update_record_custom_tables """
+        return self.update_record_custom(req, resp, 'tables')
+
+    def update_record_custom_forms(self, req, resp):
+        """ example update_record_custom_forms """
+        return self.update_record_custom(req, resp, 'forms')

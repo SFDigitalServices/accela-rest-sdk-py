@@ -14,7 +14,7 @@ def test_get_posts(client):
     """ Test get_posts """
     response = client.simulate_get(
         '/page/get_records',
-        params={'ids':'CCSF-18CAP-00000-008YI', 'expand':'customTables'})
+        params={'ids':'CCSF-18CAP-00000-008YI', 'expand':'customTables,customForms'})
     assert response.status_code == 200
 
     content = json.loads(response.content)
@@ -24,7 +24,7 @@ def test_get_posts(client):
 
     response = content['result'][0]
 
-    possible_keys = ['name', 'status', 'id', 'description', 'customTables']
+    possible_keys = ['name', 'status', 'id', 'description', 'customTables', 'customForms']
     assert len(list(set(response.keys() & possible_keys))) == len(possible_keys)
 
 def test_get_posts_missing_ids(client):
@@ -48,6 +48,7 @@ def test_create_record(client):
             assert 'id' in content['result']
             record_id = content['result']['id']
             assert 'customId' in content['result']
+
             # Test update_record_custom_tables
             with open('tests/mocks/update_record_custom_tables.json', 'r') as file_obj:
                 mock_custom_tables = json.load(file_obj)
@@ -62,20 +63,34 @@ def test_create_record(client):
             if 'status' in content:
                 assert content['status'] == 200
 
+            # Test update_record_custom_forms
+            with open('tests/mocks/update_record_custom_forms.json', 'r') as file_obj:
+                mock_custom_forms = json.load(file_obj)
+
+            assert mock_custom_tables
+            response = client.simulate_put(
+                '/page/update_record_custom_forms',
+                params={'ids':record_id},
+                body=json.dumps(mock_custom_forms))
+            assert response.status_code == 200
+            content = json.loads(response.content)
+            if 'status' in content:
+                assert content['status'] == 200
+
 def test_create_record_empty(client):
     """ Test create_record with empty post body """
     response = client.simulate_post('/page/create_record')
     assert response.status_code == 400
 
-def test_update_record_custom_tables_empty(client):
-    """ Test update_record_custom_tables """
+def test_update_record_custom_empty(client):
+    """ Test update_record_custom """
     #with empty record ids
-    response = client.simulate_put('/page/update_record_custom_tables')
+    response = client.simulate_put('/page/update_record_custom')
     assert response.status_code == 400
 
     #with empty post body
     response = client.simulate_put(
-        '/page/update_record_custom_tables',
+        '/page/update_record_custom',
         params={'ids':'CCSF-18CAP-00000-008YI'})
     assert response.status_code == 400
 
