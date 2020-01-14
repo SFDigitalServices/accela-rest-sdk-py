@@ -25,6 +25,10 @@ class Page():
         """ on page POST requests """
         self.dispatch(req, resp, name)
 
+    def on_put(self, req, resp, name):
+        """ on page POST requests """
+        self.dispatch(req, resp, name)
+
     def dispatch(self, _req, _resp, name):
         """ Dispatch requests """
         dispatch = None
@@ -67,7 +71,10 @@ class Page():
         """ example get_records response """
         if 'ids' in req.params:
             record_id = req.params['ids']
-            response = self.accela.records.get_records(record_id, None, 'AccessToken')
+            params = req.params
+            del params['ids']
+
+            response = self.accela.records.get_records(record_id, params, 'AccessToken')
 
             # default
             resp.status = falcon.HTTP_400
@@ -85,7 +92,7 @@ class Page():
             return
 
     def create_record(self, req, resp):
-        """ example post_records """
+        """ example create_record """
         if req.content_length:
             params = {'fields':'customId,id'}
             record = req.stream.read(sys.maxsize)
@@ -103,5 +110,40 @@ class Page():
         else:
             resp.status = falcon.HTTP_400
             msg = "The create record information is missing"
+            resp.body = json.dumps(jsend.error(msg))
+            return
+
+    def update_record_custom_tables(self, req, resp):
+        """ example update_record_custom_tables """
+        record_ids = None
+        if 'ids' in req.params:
+            record_ids = req.params['ids']
+
+        if not record_ids:
+            resp.status = falcon.HTTP_400
+            msg = "The ID of the record to fetch is missing"
+            resp.body = json.dumps(jsend.error(msg))
+            return
+
+        if req.content_length:
+            params = req.params
+            del params['ids']
+
+            custom_tables = req.stream.read(sys.maxsize)
+            response = self.accela.records.update_record_custom_tables(
+                record_ids, custom_tables, params)
+
+            # default
+            resp.status = falcon.HTTP_400
+            resp.body = json.dumps(jsend.error(response.text))
+
+            # if successful
+            if response.status_code == 200:
+                resp.status = falcon.HTTP_200
+                resp.body = json.dumps(response.json())
+
+        else:
+            resp.status = falcon.HTTP_400
+            msg = "Request body is required."
             resp.body = json.dumps(jsend.error(msg))
             return

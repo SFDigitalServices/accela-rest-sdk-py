@@ -1,0 +1,13 @@
+[
+	{
+            "id": "PLN_PRJ-PROJECT.cFEATURES",
+            "rows": [
+                {
+                	"action" : "add",
+                    "fields": {
+                        "Project Feature Desc": "Project description text"
+                    }
+                }
+            ]
+        }	
+]
