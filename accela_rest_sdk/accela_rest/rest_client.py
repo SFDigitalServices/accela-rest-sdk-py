@@ -54,6 +54,25 @@ class AccelaRestClient():
 
         return response
 
+    def put(self, path, data, params, auth_type):
+        """
+        | PUT request.
+
+        :param path: API Resource URI
+        :type path: str
+        :param data: Post Data
+        :type data: dict
+        :param auth_type: authorization type
+        :type auth_type: str
+        :return: server's response to the PUT request
+        :rtype: requests.Response
+        """
+        url = urllib.parse.urljoin(self.config['API_ENDPOINT'], path)
+        headers = self.set_auth_type(auth_type)
+        response = requests.put(url, headers=headers, data=data, params=params)
+
+        return response
+
     def set_auth_type(self, auth_type):
         """
         | Method to set authorization type.

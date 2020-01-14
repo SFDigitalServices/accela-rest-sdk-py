@@ -53,3 +53,24 @@ class AccelaRestRecords():
         """
         path = self.path_base
         return self.client.post(path, record, params, auth_type)
+
+    def update_record_custom_tables(self, record_ids, custom_tables,
+                                    params=None, auth_type='AccessToken'):
+        """
+        | Updates the custom table for the specified record.
+
+        Construct API reference:
+        https://developer.accela.com/docs/api_reference/api-records.html#operation/v4.put.records.recordId.customTables
+
+        :param record_ids: Comma-delimited IDs of the records to fetch.
+        :type record_ids: str
+        :param custom_tables: Custom table data to be updated.
+        :type custom_tables: array
+        :param params: Query Parameters
+        :type params: dict, optional
+        :param auth_type: Authentication type
+        :type auth_type: str, optional
+        :return: return from AccelaRestClient.put
+        """
+        path = self.path_base + '/' + record_ids + '/customTables'
+        return self.client.put(path, custom_tables, params, auth_type)
