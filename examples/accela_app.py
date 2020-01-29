@@ -113,13 +113,13 @@ class Page():
             resp.body = json.dumps(jsend.error(msg))
             return
 
-    def update_record_custom(self, req, resp, custom_type='forms'):
-        """ example update_record_custom """
-        record_ids = None
-        if 'ids' in req.params:
-            record_ids = req.params['ids']
+    def update_record(self, req, resp, custom_type=None):
+        """ example update_record """
+        record_id = None
+        if 'id' in req.params:
+            record_id = req.params['id']
 
-        if not record_ids:
+        if not record_id:
             resp.status = falcon.HTTP_400
             msg = "The ID of the record to fetch is missing"
             resp.body = json.dumps(jsend.error(msg))
@@ -127,15 +127,18 @@ class Page():
 
         if req.content_length:
             params = req.params
-            del params['ids']
+            del params['id']
 
             data = req.stream.read(sys.maxsize)
             if custom_type == 'tables':
                 response = self.accela.records.update_record_custom_tables(
-                    record_ids, data, params)
-            else:
+                    record_id, data, params)
+            elif custom_type == 'forms':
                 response = self.accela.records.update_record_custom_forms(
-                    record_ids, data, params)
+                    record_id, data, params)
+            else:
+                response = self.accela.records.update_record(
+                    record_id, data, params)
 
             # default
             resp.status = falcon.HTTP_400
@@ -155,8 +158,8 @@ class Page():
 
     def update_record_custom_tables(self, req, resp):
         """ example update_record_custom_tables """
-        return self.update_record_custom(req, resp, 'tables')
+        return self.update_record(req, resp, 'tables')
 
     def update_record_custom_forms(self, req, resp):
         """ example update_record_custom_forms """
-        return self.update_record_custom(req, resp, 'forms')
+        return self.update_record(req, resp, 'forms')

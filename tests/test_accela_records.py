@@ -49,6 +49,31 @@ def test_create_record():
 
         assert create_record_response == response.json()
 
+def test_update_record():
+    """ test update_record """
+    with open('tests/mocks/update_record.json', 'r') as file_obj:
+        update_record_data = json.load(file_obj)
+
+    assert update_record_data
+
+    with open('tests/mocks/update_record_response.json', 'r') as file_obj:
+        update_record_response = json.load(file_obj)
+
+    assert update_record_response
+
+    if update_record_data and update_record_response:
+        accela = Accela(TEST_CONFIG)
+        with patch('accela_rest_sdk.accela_rest.rest_client.requests.put') as mock_put:
+            mock_put.return_value.status_code = 200
+            mock_put.return_value.json.return_value = update_record_response
+
+            params = {'fields':'customId,id'}
+            response = accela.records.update_record(
+                "AGENCY-ABCDEF-00000-00123", update_record_data,
+                params, 'AccessToken')
+
+        assert update_record_response == response.json()
+
 def test_update_record_custom_tables():
     """ test update_record_custom_tables """
     with open('tests/mocks/update_record_custom_tables.json', 'r') as file_obj:
