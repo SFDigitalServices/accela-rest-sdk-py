@@ -116,3 +116,22 @@ class AccelaRestRecords():
         """
         path = self.path_base + '/' + record_id + '/customForms'
         return self.client.put(path, custom_forms, params, auth_type)
+
+    def create_record_comments(self, record_id, comments, params=None, auth_type='AccessToken'):
+        """
+        | Add comments to a record.
+
+        Construct API reference:
+        https://developer.accela.com/docs/api_reference/api-records.html#operation/v4.get.records.recordId.comments
+        :param record_id: The ID of the record to fetch.
+        :type record_id: str
+        :param comments: The comments to be added.
+        :type comments: array
+        :param params: Query Parameters
+        :type params: dict, optional
+        :param auth_type: Authentication type
+        :type auth_type: str, optional
+        :return: return from AccelaRestClient.post
+        """
+        path = self.path_base + '/' + record_id + '/comments'
+        return self.client.post(path, comments, params, auth_type)

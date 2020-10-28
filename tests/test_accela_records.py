@@ -123,3 +123,27 @@ def test_update_record_custom_forms():
                 params, 'AccessToken')
 
         assert update_record_custom_forms_response == response.json()
+
+def test_create_record_comments():
+    """ test create_record """
+    with open('tests/mocks/create_record_comments.json', 'r') as file_obj:
+        create_record_comments = json.load(file_obj)
+
+    assert create_record_comments
+
+    with open('tests/mocks/create_record_comments_response.json', 'r') as file_obj:
+        create_record_comments_response = json.load(file_obj)
+
+    assert create_record_comments_response
+
+    if create_record_comments and create_record_comments_response:
+        accela = Accela(TEST_CONFIG)
+        with patch('accela_rest_sdk.accela_rest.rest_client.requests.post') as mock_post:
+            mock_post.return_value.status_code = 200
+            mock_post.return_value.json.return_value = create_record_comments_response
+
+            params = {'fields':'customId,id'}
+            response = accela.records.create_record_comments(
+                "AGENCY-ABCDEF-00000-00123", create_record_comments, params)
+
+        assert create_record_comments_response == response.json()
