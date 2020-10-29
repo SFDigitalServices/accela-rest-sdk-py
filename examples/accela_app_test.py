@@ -91,6 +91,20 @@ def test_create_record(client):
             if 'status' in content:
                 assert content['status'] == 200
 
+            # Test create_record_comments
+            with open('tests/mocks/create_record_comments.json', 'r') as file_obj:
+                mock_custom_comments = json.load(file_obj)
+
+            assert mock_custom_comments
+            response = client.simulate_put(
+                '/page/create_record_comments',
+                params={'id':record_id},
+                body=json.dumps(mock_custom_comments))
+            assert response.status_code == 200
+            content = json.loads(response.content)
+            if 'status' in content:
+                assert content['status'] == 200
+
 def test_create_record_empty(client):
     """ Test create_record with empty post body """
     response = client.simulate_post('/page/create_record')
