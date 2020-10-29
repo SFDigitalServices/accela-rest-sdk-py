@@ -1,4 +1,4 @@
-# Boilerplate SDK in Python [![CircleCI](https://badgen.net/circleci/github/SFDigitalServices/boilerplate-sdk-py/master)](https://circleci.com/gh/SFDigitalServices/boilerplate-sdk-py) [![Coverage Status](https://coveralls.io/repos/github/SFDigitalServices/boilerplate-sdk-py/badge.svg?branch=master)](https://coveralls.io/github/SFDigitalServices/boilerplate-sdk-py?branch=master)
+# Boilerplate SDK in Python [![CircleCI](https://badgen.net/circleci/github/SFDigitalServices/boilerplate-sdk-py/main)](https://circleci.com/gh/SFDigitalServices/boilerplate-sdk-py) [![Coverage Status](https://coveralls.io/repos/github/SFDigitalServices/boilerplate-sdk-py/badge.svg?branch=main)](https://coveralls.io/github/SFDigitalServices/boilerplate-sdk-py?branch=main)
 
 Boilerplate for making your own SDK in Python
 
