@@ -1,4 +1,4 @@
-# Accela REST SDK in Python [![CircleCI](https://badgen.net/circleci/github/SFDigitalServices/accela-rest-sdk-py/master)](https://circleci.com/gh/SFDigitalServices/accela-rest-sdk-py) [![Coverage Status](https://coveralls.io/repos/github/SFDigitalServices/accela-rest-sdk-py/badge.svg?branch=master)](https://coveralls.io/github/SFDigitalServices/accela-rest-sdk-py?branch=master) [![Documentation Status](https://readthedocs.org/projects/accela-rest-sdk-py/badge/?version=master)](https://accela-rest-sdk-py.readthedocs.io/en/master/?badge=master)
+# Accela REST SDK in Python [![CircleCI](https://badgen.net/circleci/github/SFDigitalServices/accela-rest-sdk-py/main)](https://circleci.com/gh/SFDigitalServices/accela-rest-sdk-py) [![Coverage Status](https://coveralls.io/repos/github/SFDigitalServices/accela-rest-sdk-py/badge.svg?branch=main)](https://coveralls.io/github/SFDigitalServices/accela-rest-sdk-py?branch=main) [![Documentation Status](https://readthedocs.org/projects/accela-rest-sdk-py/badge/?version=main)](https://accela-rest-sdk-py.readthedocs.io/en/master/?badge=main)
 
 Accela REST SDK in Python
 
