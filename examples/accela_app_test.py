@@ -32,6 +32,7 @@ def test_get_posts_missing_ids(client):
     response = client.simulate_get('/page/get_records')
     assert response.status_code == 400
 
+# pylint: disable=too-many-statements
 def test_create_record(client):
     """ Test create_record """
     with open('tests/mocks/create_record.json', 'r') as file_obj:
@@ -100,6 +101,20 @@ def test_create_record(client):
                 '/page/create_record_comments',
                 params={'id':record_id},
                 body=json.dumps(mock_custom_comments))
+            assert response.status_code == 200
+            content = json.loads(response.content)
+            if 'status' in content:
+                assert content['status'] == 200
+
+            # Test create_record_addresses
+            with open('tests/mocks/create_record_addresses.json', 'r') as file_obj:
+                mock_custom_addresses = json.load(file_obj)
+
+            assert mock_custom_addresses
+            response = client.simulate_put(
+                '/page/create_record_addresses',
+                params={'id':record_id},
+                body=json.dumps(mock_custom_addresses))
             assert response.status_code == 200
             content = json.loads(response.content)
             if 'status' in content:
