@@ -142,8 +142,32 @@ def test_create_record_comments():
             mock_post.return_value.status_code = 200
             mock_post.return_value.json.return_value = create_record_comments_response
 
-            params = {'fields':'customId,id'}
+            params = None
             response = accela.records.create_record_comments(
                 "AGENCY-ABCDEF-00000-00123", create_record_comments, params)
 
         assert create_record_comments_response == response.json()
+
+def test_create_record_addresses():
+    """ test create_record """
+    with open('tests/mocks/create_record_addresses.json', 'r') as file_obj:
+        create_record_addresses = json.load(file_obj)
+
+    assert create_record_addresses
+
+    with open('tests/mocks/create_record_addresses_response.json', 'r') as file_obj:
+        create_record_addresses_response = json.load(file_obj)
+
+    assert create_record_addresses_response
+
+    if create_record_addresses and create_record_addresses_response:
+        accela = Accela(TEST_CONFIG)
+        with patch('accela_rest_sdk.accela_rest.rest_client.requests.post') as mock_post:
+            mock_post.return_value.status_code = 200
+            mock_post.return_value.json.return_value = create_record_addresses_response
+
+            params = None
+            response = accela.records.create_record_addresses(
+                "AGENCY-ABCDEF-00000-00123", create_record_addresses, params)
+
+        assert create_record_addresses_response == response.json()

@@ -138,6 +138,8 @@ class Page():
                     record_id, data, params)
             elif custom_type == 'comments':
                 response = self.accela.records.create_record_comments(record_id, data, params)
+            elif custom_type == 'addresses':
+                response = self.accela.records.create_record_addresses(record_id, data, params)
             else:
                 response = self.accela.records.update_record(
                     record_id, data, params)
@@ -167,5 +169,9 @@ class Page():
         return self.update_record(req, resp, 'forms')
 
     def create_record_comments(self, req, resp):
-        """ example create_record_comments.json """
+        """ example create_record_comments """
         return self.update_record(req, resp, 'comments')
+
+    def create_record_addresses(self, req, resp):
+        """ example create_record_addresses """
+        return self.update_record(req, resp, 'addresses')

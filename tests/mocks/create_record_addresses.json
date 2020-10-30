@@ -1,0 +1,12 @@
+[
+    {
+        "streetName": "MAIN",
+        "streetStart": "200",
+        "postalCode": "10001",
+        "streetSuffix": {
+            "text": "ST",
+            "value": "ST"
+        },
+        "neighborhood": "1234001"
+    }
+]

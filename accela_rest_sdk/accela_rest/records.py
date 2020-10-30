@@ -135,3 +135,22 @@ class AccelaRestRecords():
         """
         path = self.path_base + '/' + record_id + '/comments'
         return self.client.post(path, comments, params, auth_type)
+
+    def create_record_addresses(self, record_id, addresses, params=None, auth_type='AccessToken'):
+        """
+        | Creates new address(es) for the specified record.
+
+        Construct API reference:
+        https://developer.accela.com/docs/api_reference/v4.post.records.recordId.addresses.html
+        :param record_id: The ID of the record to fetch.
+        :type record_id: str
+        :param addresses: The addresses to be added.
+        :type addresses: array
+        :param params: Query Parameters
+        :type params: dict, optional
+        :param auth_type: Authentication type
+        :type auth_type: str, optional
+        :return: return from AccelaRestClient.post
+        """
+        path = self.path_base + '/' + record_id + '/addresses'
+        return self.client.post(path, addresses, params, auth_type)
